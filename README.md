@@ -1,1 +1,2 @@
 # CharacterNavigationView
+  一个用于通讯录等类似功能的字符导航栏，可以自定义字符集，使用RecyclerView作为字符容器，利用RecyclerView.OnItemTouchListener监听触摸事件，并转换为相应字符的触摸事件。
