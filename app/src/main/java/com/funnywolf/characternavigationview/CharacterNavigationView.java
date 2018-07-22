@@ -67,6 +67,9 @@ public class CharacterNavigationView extends RelativeLayout
     }
 
     private void onTouchChar(int position) {
+        if(position == mLastTouchPosition) {
+            return;
+        }
         Log.d(TAG, "onTouchCharIndex: " + position);
         if(mListener != null) {
             mListener.onTouchChar(position);
@@ -79,6 +82,7 @@ public class CharacterNavigationView extends RelativeLayout
             mTvChar.setVisibility(GONE);
             setActivated(false);
         }
+        mLastTouchPosition = position;
     }
 
     @Override
@@ -88,15 +92,12 @@ public class CharacterNavigationView extends RelativeLayout
 
     @Override
     public void onTouchEvent(RecyclerView rv, MotionEvent e) {
-        if(e.getAction() == MotionEvent.ACTION_UP) {
+        if(e.getAction() == MotionEvent.ACTION_UP || rv.getChildAt(0) == null) {
             onTouchChar(-1);
             return;
         }
-        int position = rv.getChildLayoutPosition(rv.findChildViewUnder(e.getX(), e.getY()));
-        if(position != mLastTouchPosition) {
-            mLastTouchPosition = position;
-            onTouchChar(position);
-        }
+        onTouchChar( rv.getChildLayoutPosition(rv.findChildViewUnder(
+                rv.getChildAt(0).getX(), e.getY() )) );
     }
 
     @Override

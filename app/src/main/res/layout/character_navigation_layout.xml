@@ -6,7 +6,6 @@
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rv_chars"
-        android:background="@drawable/cnv_backgrounnd"
         android:layout_centerVertical="true"
         android:layout_alignParentEnd="true"
         android:layout_width="wrap_content"
